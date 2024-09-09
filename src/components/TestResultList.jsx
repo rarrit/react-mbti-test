@@ -1,12 +1,16 @@
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { getTestResults } from "@/api/mbtiAPI"
 import TestResultItem from "./TestResultItem"
 
 const TestResultList = () => {  
+    const queryClient = useQueryClient();
 
   const { data, isPending, isError } = useQuery({
     queryKey: ["mbti"],
-    queryFn: getTestResults
+    queryFn: getTestResults,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["todos"]);
+    }
   })
 
   if(isPending) return <div>로딩중입니다.</div>
