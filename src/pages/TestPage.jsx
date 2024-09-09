@@ -19,7 +19,7 @@ const TestPage = () => {
       userId: user.id,
       nickname: user.nickname,
       result,
-      answers,      
+      // answers,      
       date: new Date().toISOString(),
       visibility: true,
     };    

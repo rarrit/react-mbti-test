@@ -10,9 +10,9 @@ export const createTestResult = async (resultData) => {
 };
 
 export const deleteTestResult = async (id) => {
-  await MBTI_API.delete(`/mbti${id}`)
+  await MBTI_API.delete(`/mbti/${id}`)
 };
 
 export const updateTestResultVisibility = async (id, visibility) => {
-  await MBTI_API.put(`/mbti${id}`, {visibility: !visibility})
+  await MBTI_API.patch(`/mbti/${id}`, {visibility: !visibility})
 };
