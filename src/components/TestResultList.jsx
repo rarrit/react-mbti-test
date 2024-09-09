@@ -3,8 +3,7 @@ import { getTestResults } from "@/api/mbtiAPI"
 import TestResultItem from "./TestResultItem"
 
 const TestResultList = () => {  
-    const queryClient = useQueryClient();
-
+  const queryClient = useQueryClient();
   const { data, isPending, isError } = useQuery({
     queryKey: ["mbti"],
     queryFn: getTestResults,
@@ -16,15 +15,16 @@ const TestResultList = () => {
   if(isPending) return <div>로딩중입니다.</div>
   if(isError) return <div>에러가 발견되었습니다.</div>
 
-  console.log(data);
+  const sortData = data.sort((a, b) => new Date(b.date) - new Date(a.date));   
+  
   return (
     <>
       {
-      data.map(list => {
+      sortData.map(data => {
         return (
           <TestResultItem 
-            key={list.id}
-            data={list}
+            key={data.id}
+            data={data}
           />
         )
       })  
