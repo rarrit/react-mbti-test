@@ -1,10 +1,9 @@
-import { deleteTestResult, updateTestResultVisibility } from "@/api/mbtiAPI"
 import { AuthContext } from "@/context/AuthContext"
 import { getFormattedTime } from "@/utils/dateResult"
 import { mbtiResult } from "@/utils/mbtiResult"
 import { useContext } from "react"
 
-const TestResultItem = ({ data }) => {
+const TestResultItem = ({ data, onDelete, onUpdate }) => {
   const { isLogin, user } = useContext(AuthContext);
   console.log(isLogin, user);
 
@@ -24,11 +23,11 @@ const TestResultItem = ({ data }) => {
         날짜 : {getFormattedTime(data.date)}
         {
           user.id === data.userId && 
-          <button onClick={() => deleteTestResult(data.id)}>삭제</button>
+          <button onClick={onDelete}>삭제</button>
         }      
         {
           user.id === data.userId && (
-            <button onClick={() => updateTestResultVisibility(data.id, data.visibility)}>
+            <button onClick={onUpdate}>
               {data.visibility ? '비공개' : '공개'}
             </button>
           )
