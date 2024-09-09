@@ -1,7 +1,10 @@
+import { useNavigate } from "react-router-dom"
+
 const Main = () => {
+  const navigate = useNavigate();
   return (
     <div>
-      매안 패아자
+      <button onClick={()=> navigate('/mbti')}>테스트하기</button>
     </div>
   )
 }

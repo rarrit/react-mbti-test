@@ -20,6 +20,8 @@ const Header = () => {
           {
             isLogin ? (
               <>
+                <Link to={`/mbti`}>테스트</Link>        
+                <Link to={`/results`}>결과보기</Link>        
                 <Link to={`/mypage`}>마이페이지</Link>        
                 <button onClick={handleLogout}>로그아웃</button>
               </>

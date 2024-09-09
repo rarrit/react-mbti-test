@@ -8,6 +8,8 @@ import Main from "@/pages/Main"
 import Mypage from "@/pages/Mypage"
 import { useEffect } from "react"
 import ProtectedRoute from "@/components/ProtectedRoute"
+import Test from "@/pages/TestPage"
+import TestResultPage from "@/pages/TestResultPage"
 
 
 
@@ -50,6 +52,22 @@ const Router = () => {
               </ProtectedRoute>
             }
           />   
+          <Route 
+            path="/mbti" 
+            element={
+              <ProtectedRoute redirectNotLogin="/login">
+                <Test/>
+              </ProtectedRoute>
+            }
+          />  
+          <Route 
+            path="/results" 
+            element={
+              <ProtectedRoute redirectNotLogin="/login">
+                <TestResultPage/>
+              </ProtectedRoute>
+            }
+          />  
         </Routes>
       </Layout>
     </BrowserRouter>

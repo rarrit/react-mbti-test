@@ -1,4 +1,4 @@
-import { handleUserLogin } from "@/api/auth";
+import { handleUserLogin } from "@/api/authAPI";
 import { AuthContext } from "@/context/AuthContext";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +7,7 @@ const Login = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext);
+  const { login, saveUserInfo } = useContext(AuthContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -17,6 +17,7 @@ const Login = () => {
       if(response.success){        
         alert("로그인되었습니다. 메인 페이지로 이동합니다.")
         login(response.accessToken);
+        saveUserInfo(response);
         navigate("/");
       }
     }catch(e){
