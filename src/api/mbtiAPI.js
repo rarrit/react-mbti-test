@@ -13,6 +13,7 @@ export const deleteTestResult = async (id) => {
   await MBTI_API.delete(`/mbti/${id}`)
 };
 
-export const updateTestResultVisibility = async (id, visibility) => {
-  await MBTI_API.patch(`/mbti/${id}`, {visibility: !visibility})
+export const updateTestResultVisibility = async ({id, vis}) => {
+  console.log("visibility=>", vis);
+  await MBTI_API.patch(`/mbti/${id}`, {visibility: !vis})
 };

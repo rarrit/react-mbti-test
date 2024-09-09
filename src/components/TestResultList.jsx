@@ -1,22 +1,21 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query"
-import { deleteTestResult, getTestResults, updateTestResultVisibility } from "@/api/mbtiAPI"
 import TestResultItem from "./TestResultItem"
+import { useMbti } from "@/hooks/queries";
+import { useDeleteMbti, useVisibilityMbti } from "@/hooks/mutations";
 
 const TestResultList = () => {  
-  const queryClient = useQueryClient();
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ["mbti"],
-    queryFn: getTestResults,
-    onSuccess: () => {
-      queryClient.invalidateQueries(["mbti"]);
-    }
-  })
+  
+  const { data, isLoading, isError } = useMbti();
+  // custom hooks
+  const { mutate: onDeleteMbti } = useDeleteMbti();
+  const { mutate: onUpdateMbti } = useVisibilityMbti();
+
+  console.log(data);
 
   if(isLoading) return <div>로딩중입니다.</div>
   if(isError) return <div>에러가 발견되었습니다.</div>
 
   const sortData = data.sort((a, b) => new Date(b.date) - new Date(a.date));   
-  
+  console.log("sortData =>>>", sortData);
   return (
     <>
       {
@@ -25,8 +24,8 @@ const TestResultList = () => {
           <TestResultItem 
             key={list.id}
             data={list}
-            onDelete={() => deleteTestResult(list.id)}
-            onUpdate={() => updateTestResultVisibility(list.id, list.visibility)}
+            onDelete={onDeleteMbti}
+            onUpdate={onUpdateMbti}
           />
         )
       })  
