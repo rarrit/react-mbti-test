@@ -4,23 +4,11 @@ import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import GlobalStyle from "../GlobalStyle"
 import { House, BookOpenCheck, ListChecks, UserRoundPen, LogOut, LogIn, UserRoundPlus } from 'lucide-react';
-import { useEffect } from "react"
-import { getUserProfile } from "@/api/authAPI"
 
 
 const Header = () => {
-  const { isLogin, logout, setIsUserInfo } = useContext(AuthContext);
+  const { isLogin, logout } = useContext(AuthContext);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const getProfile = async () => {
-      const token = localStorage.getItem("accessToken");
-      const userProfile = await getUserProfile(token);        
-      setIsUserInfo(userProfile);
-    }
-    getProfile();
-  }, [])
-
 
   const handleLogout = () => {
     logout();
