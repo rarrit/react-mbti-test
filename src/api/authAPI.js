@@ -11,10 +11,22 @@ export const handleUserLogin = async (userData) => {
   return response.data;
 };
 
-// export const getUserProfile = async (token) => {
-  
-// };
+export const getUserProfile = async (token) => {
+  const response = await USER_API.get("/user", {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },        
+  })
+  return response.data;
+};
 
-// export const updateProfile = async (formData) => {
-
-// };
+export const updateProfile = async (formData, token) => {
+  const response = await USER_API.patch("/profile", formData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  })
+  return response.data;
+};
