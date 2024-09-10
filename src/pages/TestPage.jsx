@@ -10,21 +10,22 @@ import { getMbtiImg } from "@/utils/mbtiImg";
 
 const TestPage = () => {
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
+  const { isUserInfo } = useContext(AuthContext);
   const [resultInfo, setResultInfo] = useState(null);
-
+  
   const handleTestSubmit = async (answers) => {
     const result = calculateMBTI(answers);    
     console.log(result);
     setResultInfo(result); 
     const resultData = {
-      userId: user.id,
-      nickname: user.nickname,
+      userId: isUserInfo.id,
+      nickname: isUserInfo.nickname,
       result,
       // answers,      
       date: new Date().toISOString(),
       visibility: true,
     };    
+    console.log("resultData =====>", resultData);
     await createTestResult(resultData);    
     
   };
