@@ -1,8 +1,8 @@
 import { questions } from "@/data/questions"
 import { useState } from "react";
+import styled from "styled-components";
 const TestForm = ({ onSubmit }) => {
-  
-  // 
+
   const [answers, setAnswers] = useState(Array(questions.length).fill(null));
 
   // 체크된 input의 값을 전달 (순서, yes or no)
@@ -20,31 +20,85 @@ const TestForm = ({ onSubmit }) => {
     onSubmit(answers);
   };
 
+  console.log("questions =>", questions);
+
   return (
-    <form onSubmit={handleSubmit}>
+    <StTestForm onSubmit={handleSubmit}>
       <ul>
         {questions.map((list, i) => (
           <li key={list.id}>
             <strong>{list.question}</strong>
-            {list.options.map((option, ind) => (
-                <label key={ind}>
+            <div className="labelWrap">
+              {list.options.map((option, ind) => (
+      
+                <div className="labelBox" key={ind}>
                   <input 
                     type="radio"
+                    id={`question-${i}-${option}`}
                     name={`question-${list.id}`}
                     value={option}
                     checked={answers[i] === option}
                     onChange={() => handleChange(i, option)}
                   />
-                  {option}
-                </label>
+                  <label htmlFor={`question-${i}-${option}`}>                    
+                    {option}
+                  </label>
+                </div>
               ))}
+            </div>           
           </li>
         ))}
       </ul>
       <button type="submit">저장</button>
-    </form>
+    </StTestForm>
   )
 }
+const StTestForm = styled.form`
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    li {
+      background: white;
+      padding: 15px;
+      border-top: 15px solid #ecc100;
+      border-radius: 10px;
+      word-break: keep-all;
+      .labelWrap {
+        display: flex;
+        align-items: center;              
+        border-top: 1px solid #eee;
+        margin: 20px 0 0 0;
+        padding: 10px 0 0 0;
+        .labelBox {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 50%;
+          height: 30px;
+          &:first-child {
+            border-right: 1px solid #eee;
+          }
+          input:checked + label {
+            color: red;
+          }
+        }
+      }
+    }
+  }
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 40px;
+    color: #fff;    
+    background: #ecc100;
+    border: 1px solid #fff;
+    border-radius: 3px;
+    margin: 20px 0 0 0;
+  }
+`
 
 
 

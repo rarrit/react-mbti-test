@@ -7,6 +7,46 @@
       "result": "INFP",
       "date": "2024-09-09T07:56:34.702Z",
       "visibility": false
+    },
+    {
+      "id": "6315",
+      "userId": "test123123123",
+      "nickname": null,
+      "result": "ENTP",
+      "date": "2024-09-09T13:45:59.210Z",
+      "visibility": true
+    },
+    {
+      "id": "2025",
+      "userId": "rarrit2",
+      "nickname": "황야의 바위두꺼비",
+      "result": "ISFJ",
+      "date": "2024-09-09T14:05:21.775Z",
+      "visibility": false
+    },
+    {
+      "id": "8240",
+      "userId": "rarrit2",
+      "nickname": null,
+      "result": "ENTP",
+      "date": "2024-09-09T14:12:22.487Z",
+      "visibility": true
+    },
+    {
+      "id": "8800",
+      "userId": "rarrit2",
+      "nickname": null,
+      "result": "ISFJ",
+      "date": "2024-09-09T14:14:55.624Z",
+      "visibility": true
+    },
+    {
+      "id": "67e8",
+      "userId": "rarrit2",
+      "nickname": "황야의 바위두꺼비",
+      "result": "ENTP",
+      "date": "2024-09-09T14:28:04.802Z",
+      "visibility": true
     }
   ]
 }
