@@ -15,6 +15,7 @@ const TestPage = () => {
 
   const handleTestSubmit = async (answers) => {
     const result = calculateMBTI(answers);    
+    console.log(result);
     setResultInfo(result); 
     const resultData = {
       userId: user.id,
@@ -36,7 +37,7 @@ const TestPage = () => {
       ? (
         <StResultForm>
           <h2>{resultInfo}</h2>
-          <StImg className="mbtiImg" $imgUrl={mbtiImg} />
+          <StImg className="mbtiImg" src={mbtiImg} />
           <p className="minSans" dangerouslySetInnerHTML={{__html: mbtiResult(resultInfo)}}/>
 
           <div className="btnArea">
@@ -125,11 +126,8 @@ const StResultForm = styled.div`
     }
   }
 `
-const StImg = styled.div`
+const StImg = styled.img`
   width: 100%;
-  min-height:300px;
-  background: url(${props => props.$imgUrl}) no-repeat center center;
-  background-size: cover;
   box-shadow: .5px .5px 10px rgba(0,0,0,.5);
   border-radius: 10px;
   margin: 0 0 30px;

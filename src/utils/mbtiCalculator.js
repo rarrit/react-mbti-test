@@ -14,14 +14,16 @@ export const calculateMBTI = (answers) => {
 
   answers.forEach((answer, index) => {
     const question = questions[index];
+    const c = answer;
+    console.log("c ==>",c);
     if (question.type === "E/I") {
-      scores[answer === "예" ? "E" : "I"]++;
+      scores[answer === answer ? "E" : "I"]++;
     } else if (question.type === "S/N") {
-      scores[answer === "예" ? "S" : "N"]++;
+      scores[answer === answer ? "S" : "N"]++;
     } else if (question.type === "T/F") {
-      scores[answer === "예" ? "T" : "F"]++;
+      scores[answer === answer ? "T" : "F"]++;
     } else if (question.type === "J/P") {
-      scores[answer === "예" ? "J" : "P"]++;
+      scores[answer === answer ? "J" : "P"]++;
     }
   });
 

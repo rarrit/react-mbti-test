@@ -16,7 +16,7 @@ const Layout = ({ children }) => {
 
 const StContainer = styled.div`
   width: 100%;
-  max-width: 760px;
+  max-width: 670px;
   margin: 0 auto;
   padding: 80px 15px 0;
 `

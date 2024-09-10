@@ -5,5 +5,5 @@ export const USER_API = axios.create({
 })
 
 export const MBTI_API = axios.create({
-  baseURL: "http://localhost:4000"
+  baseURL: "https://olive-fascinated-hyssop.glitch.me"
 })
