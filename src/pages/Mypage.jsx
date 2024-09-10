@@ -12,28 +12,23 @@ const MyPage = () => {
   const navigate = useNavigate();
 
   
-  useEffect(() => {
-    if (!isLogin) {
-      alert("로그인이 필요합니다.");
-      navigate("/login");
-    } else {
-      const fetchUserInfo = async () => {
-        try {
-          const token = localStorage.getItem("accessToken");
-          if (token) { // 토큰이 존재하는지 확인
-            const response = await getUserProfile(token); // await 사용
-            setUserInfo(response); // response.data가 아닌 response로 설정
-          } else {
-            alert("토큰이 존재하지 않습니다.");
-            logout();
-          }
-        } catch (error) {
-          console.error("Failed to fetch user info:", error);
+  useEffect(() => {    
+    const fetchUserInfo = async () => {
+      try {
+        const token = localStorage.getItem("accessToken");
+        if (token) { // 토큰이 존재하는지 확인
+          const response = await getUserProfile(token); // await 사용
+          setUserInfo(response); // response.data가 아닌 response로 설정
+        } else {
+          alert("토큰이 존재하지 않습니다.");
           logout();
         }
-      };
-      fetchUserInfo();
+      } catch (error) {
+        console.error("Failed to fetch user info:", error);
+        logout();
+      }      
     }
+    fetchUserInfo();
   }, [isLogin, navigate, logout]);
 
   const handleNicknameChange = async (e) => {

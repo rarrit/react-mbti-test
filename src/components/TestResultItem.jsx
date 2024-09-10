@@ -4,12 +4,8 @@ import { mbtiResult } from "@/utils/mbtiResult"
 import { useContext } from "react"
 import styled from "styled-components"
 
-const TestResultItem = ({ data, onDelete, onUpdate }) => {
-  
+const TestResultItem = ({ data, onDelete, onUpdate }) => {  
   const { isUserInfo } = useContext(AuthContext);
-
-  console.log("result isUserInfo ==> " ,isUserInfo);
-  console.log("result data ===>", data);
 
   // 공개 글 || 나의 글
   if(data.visibility || isUserInfo) {
