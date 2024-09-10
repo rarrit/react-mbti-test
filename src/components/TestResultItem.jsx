@@ -1,22 +1,23 @@
+import { AuthContext } from "@/context/AuthContext"
 import { getFormattedTime } from "@/utils/dateResult"
 import { mbtiResult } from "@/utils/mbtiResult"
+import { useContext } from "react"
 import styled from "styled-components"
 
-const TestResultItem = ({ data, loginUser, onDelete, onUpdate }) => {
+const TestResultItem = ({ data, onDelete, onUpdate }) => {
   
-  console.log("data.userId ===>", data.userId, "loginUser id ===>", loginUser.id);
+  const { isUserInfo } = useContext(AuthContext);
 
-  if(!data) return false
 
   // 공개 글 || 나의 글
-  if(data.visibility || loginUser) {
+  if(data.visibility || isUserInfo) {
     return (
       <StMbtiItem>
         <div className="info">
           <p>
             {data.nickname ? data.nickname : data.userId}        
             {
-              loginUser.id === data.userId && (
+              isUserInfo.id === data.userId && (
                 <span className={data.visibility ? `listState release` : `listState private` }>
                   {data.visibility ? '공개 글' : '비공개 글'}
                 </span>
@@ -32,7 +33,7 @@ const TestResultItem = ({ data, loginUser, onDelete, onUpdate }) => {
         
         
         {
-          loginUser.id === data.userId && (
+          isUserInfo.id === data.userId && (
             <div className="btnArea">
               <button onClick={() => onDelete(data.id)}>삭제</button>
               <button onClick={() => onUpdate({id: data.id, vis: data.visibility})}>
