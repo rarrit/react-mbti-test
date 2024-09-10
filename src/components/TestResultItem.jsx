@@ -7,12 +7,12 @@ import styled from "styled-components"
 const TestResultItem = ({ data, onDelete, onUpdate }) => {
   const { user } = useContext(AuthContext);
   
-  console.log("data.visi =>",data.visibility );
-  console.log("user.id =>", user.id );
-  console.log("data.userId =>", data.userId );
+  // console.log("data.visi =>",data.visibility );
+  // console.log("user.id =>", user.id );
+  // console.log("data.userId =>", data.userId );
 
   // 공개 글 || 나의 글
-  if(data.visibility && user.id === data.userId) {
+  if(data.visibility || user.id === data.userId) {
     return (
       <StMbtiItem>
         <div className="info">
