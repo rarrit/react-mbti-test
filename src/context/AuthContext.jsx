@@ -11,18 +11,18 @@ export const AuthProvider = ({ children }) => {
   const [isLogin, setIsLogin] = useState(null);
   const [isUserInfo, setIsUserInfo] = useState({});
   const token = localStorage.getItem("accessToken");
+  
 
   useEffect(() => {
     const getProfile = async () => {      
       if(token) {
         const userProfile = await getUserProfile(token);        
         setIsUserInfo(userProfile);      
+        setIsLogin(true);
       }      
     }
     getProfile();
   }, [token]);
-
-  console.log("isUserInfo =======>", isUserInfo);
 
   const login = (token) => {
     saveStorage("accessToken", token);
@@ -42,7 +42,8 @@ export const AuthProvider = ({ children }) => {
       login,
       logout,
       isUserInfo,
-      setIsUserInfo
+      setIsUserInfo,
+      token
     }}>
       {children}
     </AuthContext.Provider>
