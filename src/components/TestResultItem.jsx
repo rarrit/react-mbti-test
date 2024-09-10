@@ -33,18 +33,18 @@ const TestResultItem = ({ data, onDelete, onUpdate }) => {
           <p className="descText minSans" dangerouslySetInnerHTML={{__html: mbtiResult(data.result)}} />
         </div> 
         
-        <div className="btnArea">
-          {
-            user.id === data.userId && (
-              <>
-                <button onClick={() => onDelete(data.id)}>삭제</button>
-                <button onClick={() => onUpdate({id: data.id, vis: data.visibility})}>
-                  {data.visibility ? '비공개' : '공개'}
-                </button>
-              </>
-            )
-          }      
-        </div>
+        
+        {
+          user.id === data.userId && (
+            <div className="btnArea">
+              <button onClick={() => onDelete(data.id)}>삭제</button>
+              <button onClick={() => onUpdate({id: data.id, vis: data.visibility})}>
+                {data.visibility ? '비공개' : '공개'}
+              </button>
+            </div>
+          )
+        }      
+        
         
       </StMbtiItem>
     )
