@@ -1,6 +1,7 @@
 import TestResultItem from "./TestResultItem"
 import { useMbti } from "@/hooks/queries";
 import { useDeleteMbti, useVisibilityMbti } from "@/hooks/mutations";
+import styled from "styled-components";
 
 const TestResultList = () => {  
   
@@ -17,7 +18,7 @@ const TestResultList = () => {
   const sortData = data.sort((a, b) => new Date(b.date) - new Date(a.date));   
   console.log("sortData =>>>", sortData);
   return (
-    <>
+    <StResultItemWrap>
       {
       sortData.map(list => {
         return (
@@ -30,8 +31,14 @@ const TestResultList = () => {
         )
       })  
     }   
-    </>    
+    </StResultItemWrap>    
   )
 }
+const StResultItemWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;  
+`
 
 export default TestResultList
