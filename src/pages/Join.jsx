@@ -1,8 +1,9 @@
 import { useState } from "react"
-import { handleUserRegister } from "@/api/authAPI";
+// import { handleUserRegister } from "@/api/authAPI";
 import { useNavigate } from "react-router-dom";
 import JoinImg from "@/assets/img/bg-mbti3.png";
 import styled from "styled-components";
+import { useRegisterUser } from "@/hooks/mutations";
 
 const Join = () => {
   const [id, setId] = useState(""); // 회원가입 아이디
@@ -10,28 +11,46 @@ const Join = () => {
   const [nickname, setNickname] = useState(""); // 회원가입 닉네임
   const navigate = useNavigate();
 
-  const handleJoin = async (e) => {
+  const { mutate : registerUser, isPending } = useRegisterUser()  
+
+  if(isPending) return <div>로딩중 입니다.</div>
+
+  const handleJoin = (e) => {
     e.preventDefault();
-    try{
-      // 작성한 값
-      const joinData = {
-        id,
-        password,
-        nickname
-      }
-      // 해당 함수를 통해 데이터를 db에 전송함
-      const response = await handleUserRegister(joinData);
-      if(response.success) {
-        alert("회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.")
+    const joinData = {id, password, nickname}
+    registerUser(joinData, {
+      onSuccess: (response) => {
+        alert(`${response.message}, 로그인 페이지로 이동합니다.`)
         navigate("/login");
-      }else{
-        alert(response.message || "회원가입이 실패했습니다.");
+      },
+      onError: (error) => {
+        alert(error.response?.data?.message || "회원가입에 실패했습니다.");
       }
-    }catch(e){
-      console.log("Join Error =>", e.response || e);
-      alert("회원가입을 실패했습니다.")
-    }
+    })
   }
+
+  // const handleJoin = async (e) => {
+  //   e.preventDefault();
+  //   try{
+  //     // 작성한 값
+  //     const joinData = {
+  //       id,
+  //       password,
+  //       nickname
+  //     }
+  //     // 해당 함수를 통해 데이터를 db에 전송함
+  //     const response = await handleUserRegister(joinData);
+  //     if(response.success) {
+  //       alert("회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.")
+  //       navigate("/login");
+  //     }else{
+  //       alert(response.message || "회원가입이 실패했습니다.");
+  //     }
+  //   }catch(e){
+  //     console.log("Join Error =>", e.response || e);
+  //     alert("회원가입을 실패했습니다.")
+  //   }
+  // }
 
   return (
     <StForm onSubmit={handleJoin}>

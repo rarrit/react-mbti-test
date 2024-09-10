@@ -1,9 +1,10 @@
-import { handleUserLogin } from "@/api/authAPI";
+// import { handleUserLogin } from "@/api/authAPI";
 import { AuthContext } from "@/context/AuthContext";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginImg from "@/assets/img/bg-mbti1.jpg";
 import styled from "styled-components";
+import { useLoginUser } from "@/hooks/mutations";
 
 const Login = () => {
   const [id, setId] = useState(""); // 로그인 아이디
@@ -11,22 +12,40 @@ const Login = () => {
   const navigate = useNavigate();
 
   const { login } = useContext(AuthContext);
+  const { mutate: loginUser, isError } = useLoginUser();
 
-  const handleLogin = async (e) => {
+  if(isError) return <div>에러발생 에러발생.</div>
+
+  const handleLogin = (e) => {
     e.preventDefault();
-    try{
-      const loginData = { id, password }
-      const response = await handleUserLogin(loginData);
-      if(response.success){        
-        alert("로그인되었습니다. 메인 페이지로 이동합니다.");
+    const loadingData = { id, password };
+    loginUser(loadingData, {
+      onSuccess: (response) => {      
+        alert(`로그인에 성공했습니다. 메인 페이지로 이동합니다.`);
         login(response.accessToken);        
         navigate("/");
+      },
+      onError: (error) => {
+        alert(error.response?.data?.message || "로그인에 실패했습니다.")
       }
-    }catch(e){
-      console.log("Login Error =>", e);
-      alert("로그인이 실패했습니다.")
-    }
+    })
   }
+
+  // const handleLogin = async (e) => {
+  //   e.preventDefault();
+  //   try{
+  //     const loginData = { id, password }
+  //     const response = await handleUserLogin(loginData);
+  //     if(response.success){        
+  //       alert("로그인되었습니다. 메인 페이지로 이동합니다.");
+  //       login(response.accessToken);        
+  //       navigate("/");
+  //     }
+  //   }catch(e){
+  //     console.log("Login Error =>", e);
+  //     alert("로그인이 실패했습니다.")
+  //   }
+  // }
 
   return (
     <StForm onSubmit={handleLogin}>
