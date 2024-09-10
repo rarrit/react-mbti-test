@@ -13,9 +13,7 @@ export const calculateMBTI = (answers) => {
   };
 
   answers.forEach((answer, index) => {
-    const question = questions[index];
-    const c = answer;
-    console.log("c ==>",c, "question ==>", question);
+    const question = questions[index];    
     if (question.type === "E/I") {
       // answer(내가 선택)
       scores[answer === 0 ? "E" : "I"]++;

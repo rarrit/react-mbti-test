@@ -4,11 +4,27 @@ import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import GlobalStyle from "../GlobalStyle"
 import { House, BookOpenCheck, ListChecks, UserRoundPen, LogOut, LogIn, UserRoundPlus } from 'lucide-react';
+import { useEffect } from "react"
+import { getUserProfile } from "@/api/authAPI"
 
 
 const Header = () => {
-  const { isLogin, logout } = useContext(AuthContext);
+  const { isLogin, logout, setIsUserInfo } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const getProfile = async () => {
+      try{
+        const token = localStorage.getItem("accessToken");
+        const userProfile = await getUserProfile(token);        
+        setIsUserInfo(userProfile);
+      }catch(e){
+        alert("유저의 정보가 없습니다.", e)
+      }
+    }
+    getProfile();
+  }, [])
+
 
   const handleLogout = () => {
     logout();

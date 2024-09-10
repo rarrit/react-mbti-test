@@ -7,7 +7,6 @@ const TestForm = ({ onSubmit }) => {
 
   // 체크된 input의 값을 전달 (순서, yes or no)
   const handleChange = (index, answer) => {
-    console.log(index, answer);
     // 기존의 answers 배열을 복사 (불변성을 유지하기 위해)
     const newAnswers = [...answers];
     // 특정 질문(index)에 해당하는 답변을 새로운 값(answer)으로 변경

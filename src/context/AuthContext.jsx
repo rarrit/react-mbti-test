@@ -9,6 +9,7 @@ const removeStorage = key => localStorage.removeItem(key);
 
 export const AuthProvider = ({ children }) => {
   const [isLogin, setIsLogin] = useState(!!token);
+  const [isUserInfo, setIsUserInfo] = useState({});
 
   const login = (token) => {
     saveStorage("accessToken", token);
@@ -24,7 +25,9 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider value={{
       isLogin,
       login,
-      logout
+      logout,
+      isUserInfo,
+      setIsUserInfo
     }}>
       {children}
     </AuthContext.Provider>
