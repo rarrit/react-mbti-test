@@ -8,6 +8,8 @@ const TestResultItem = ({ data, onDelete, onUpdate }) => {
   
   const { isUserInfo } = useContext(AuthContext);
 
+  console.log("result isUserInfo ==> " ,isUserInfo);
+  console.log("result data ===>", data);
 
   // 공개 글 || 나의 글
   if(data.visibility || isUserInfo) {
