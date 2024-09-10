@@ -1,9 +1,9 @@
 import { useEffect, useState, useContext } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "@/context/AuthContext";
 import MypageImg from "@/assets/img/bg-mbti4.png";
 import styled from "styled-components";
+import { getUserProfile, updateProfile } from "@/api/authAPI";
 
 const MyPage = () => {
   const [userInfo, setUserInfo] = useState(null);
@@ -11,6 +11,7 @@ const MyPage = () => {
   const { isLogin, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  
   useEffect(() => {
     if (!isLogin) {
       alert("로그인이 필요합니다.");
@@ -19,15 +20,13 @@ const MyPage = () => {
       const fetchUserInfo = async () => {
         try {
           const token = localStorage.getItem("accessToken");
-          const response = await axios.get(
-            "https://moneyfulpublicpolicy.co.kr/user",
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-          setUserInfo(response.data);
+          if (token) { // 토큰이 존재하는지 확인
+            const response = await getUserProfile(token); // await 사용
+            setUserInfo(response); // response.data가 아닌 response로 설정
+          } else {
+            alert("토큰이 존재하지 않습니다.");
+            logout();
+          }
         } catch (error) {
           console.error("Failed to fetch user info:", error);
           logout();
@@ -35,7 +34,7 @@ const MyPage = () => {
       };
       fetchUserInfo();
     }
-  }, [isLogin, navigate]);
+  }, [isLogin, navigate, logout]);
 
   const handleNicknameChange = async (e) => {
     e.preventDefault();
@@ -44,21 +43,12 @@ const MyPage = () => {
       const formData = new FormData();
       formData.append("nickname", newNickname);
 
-      const response = await axios.patch(
-        "https://moneyfulpublicpolicy.co.kr/profile",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await updateProfile(formData, token)
 
-      if (response.data.success) {
+      if (response.success) {
         setUserInfo((prevState) => ({
           ...prevState,
-          nickname: response.data.nickname,
+          nickname: response.nickname,
         }));
         alert("닉네임이 변경되었습니다.");
         setNewNickname("");

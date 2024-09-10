@@ -6,10 +6,11 @@ import LoginImg from "@/assets/img/bg-mbti1.jpg";
 import styled from "styled-components";
 
 const Login = () => {
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
+  const [id, setId] = useState(""); // 로그인 아이디
+  const [password, setPassword] = useState(""); // 로그인 비밀번호
   const navigate = useNavigate();
-  const { login, saveUserInfo } = useContext(AuthContext);
+
+  const { login } = useContext(AuthContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -17,9 +18,8 @@ const Login = () => {
       const loginData = { id, password }
       const response = await handleUserLogin(loginData);
       if(response.success){        
-        alert("로그인되었습니다. 메인 페이지로 이동합니다.")
-        login(response.accessToken);
-        saveUserInfo(response);
+        alert("로그인되었습니다. 메인 페이지로 이동합니다.");
+        login(response.accessToken);        
         navigate("/");
       }
     }catch(e){
@@ -42,7 +42,7 @@ const Login = () => {
         <img src={LoginImg} alt="" />
       </div>
       <input type="text" value={id} placeholder="아이디를 입력하세요!" onChange={(e) => setId(e.target.value)}/>
-      <input type="password" value={password} placeholder="비밀번호를 입력하세요!" onChange={(e) => setPassword(e.target.value)}/>
+      <input type="password" value={password} placeholder="비밀번호를 입력하세요!" autoComplete="off"  onChange={(e) => setPassword(e.target.value)}/>
       <button>로그인</button>
     </StForm>
   )

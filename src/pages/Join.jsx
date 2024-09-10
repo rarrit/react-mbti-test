@@ -5,20 +5,21 @@ import JoinImg from "@/assets/img/bg-mbti3.png";
 import styled from "styled-components";
 
 const Join = () => {
-
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
-  const [nickname, setNickname] = useState("");
+  const [id, setId] = useState(""); // 회원가입 아이디
+  const [password, setPassword] = useState(""); // 회원가입 비밀번호
+  const [nickname, setNickname] = useState(""); // 회원가입 닉네임
   const navigate = useNavigate();
 
   const handleJoin = async (e) => {
     e.preventDefault();
     try{
+      // 작성한 값
       const joinData = {
         id,
         password,
         nickname
       }
+      // 해당 함수를 통해 데이터를 db에 전송함
       const response = await handleUserRegister(joinData);
       if(response.success) {
         alert("회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.")
@@ -61,6 +62,7 @@ const Join = () => {
         <input 
           type="password" 
           name="password"
+          autoComplete="off" 
           value={password} 
           placeholder="비밀번호를 입력하세요!"
           onChange={(e) => setPassword(e.target.value)}
