@@ -14,13 +14,9 @@ const Header = () => {
 
   useEffect(() => {
     const getProfile = async () => {
-      try{
-        const token = localStorage.getItem("accessToken");
-        const userProfile = await getUserProfile(token);        
-        setIsUserInfo(userProfile);
-      }catch(e){
-        alert("유저의 정보가 없습니다.", e)
-      }
+      const token = localStorage.getItem("accessToken");
+      const userProfile = await getUserProfile(token);        
+      setIsUserInfo(userProfile);
     }
     getProfile();
   }, [])

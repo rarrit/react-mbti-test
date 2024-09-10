@@ -23,6 +23,9 @@ const GlobalStyle = createGlobalStyle`
   body {
     background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(76,148,190,1) 100%);
   }
+  button, a {
+    cursor:pointer;
+  }
 `;
 
 export default GlobalStyle;
