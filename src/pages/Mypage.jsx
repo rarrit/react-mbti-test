@@ -8,7 +8,7 @@ import styled from "styled-components";
 const MyPage = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [newNickname, setNewNickname] = useState("");
-  const { isLogin } = useContext(AuthContext);
+  const { isLogin, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,6 +30,7 @@ const MyPage = () => {
           setUserInfo(response.data);
         } catch (error) {
           console.error("Failed to fetch user info:", error);
+          logout();
         }
       };
       fetchUserInfo();

@@ -20,7 +20,6 @@ const TestForm = ({ onSubmit }) => {
     onSubmit(answers);
   };
 
-  console.log("questions =>", questions);
 
   return (
     <StTestForm onSubmit={handleSubmit}>
@@ -83,9 +82,11 @@ const StTestForm = styled.form`
             width: 100%;
             text-align: center;
             cursor: pointer;
+            font-size: 13px;
+            color: #888;
           }
           input:checked + label {
-            color: red;
+            color: red;          
           }
         }
       }
