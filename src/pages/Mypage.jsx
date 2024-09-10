@@ -97,7 +97,7 @@ const MyPage = () => {
               type="text"
               value={newNickname}
               onChange={(e) => setNewNickname(e.target.value)}
-              placeholder="새 닉네임"
+              placeholder="변경할 닉네임을 입력해주세요!"
             />
           </p>
           <button type="submit">닉네임 변경</button>
@@ -159,6 +159,11 @@ const StMypageArea = styled.div`
     border-radius: 10px;
     margin: 20px 0 0 0;
     padding: 15px;
+    input {
+      &::-webkit-input-placeholder {
+        color: #858585;
+      }
+    }
     p {
       display: flex;
       border-bottom: 1px solid #e5e5e5;

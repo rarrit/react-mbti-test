@@ -79,6 +79,11 @@ const StTestForm = styled.form`
           &:first-child {
             border-right: 1px solid #eee;
           }
+          label {
+            width: 100%;
+            text-align: center;
+            cursor: pointer;
+          }
           input:checked + label {
             color: red;
           }
