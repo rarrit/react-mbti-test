@@ -12,6 +12,7 @@ export const handleUserLogin = async (userData) => {
 };
 
 export const getUserProfile = async (token) => {
+  if(!token) throw new Error("토큰이 없습니다. 다시 로그인해주세요.")
   const response = await USER_API.get("/user", {
     headers: {
       "Content-Type": "application/json",
@@ -22,6 +23,7 @@ export const getUserProfile = async (token) => {
 };
 
 export const updateProfile = async (formData, token) => {
+  if(!token) throw new Error("토큰이 없습니다. 다시 로그인해주세요.")
   const response = await USER_API.patch("/profile", formData, {
     headers: {
       Authorization: `Bearer ${token}`,
