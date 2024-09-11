@@ -11,18 +11,6 @@ export const AuthProvider = ({ children }) => {
   const [isLogin, setIsLogin] = useState(null);
   const [isUserInfo, setIsUserInfo] = useState({});
   const token = localStorage.getItem("accessToken");
-  
-
-  useEffect(() => {
-    const getProfile = async () => {      
-      if(token) {
-        const userProfile = await getUserProfile(token);        
-        setIsUserInfo(userProfile);      
-        setIsLogin(true);
-      }      
-    }
-    getProfile();
-  }, [token]);
 
   const login = (token) => {
     saveStorage("accessToken", token);
@@ -34,6 +22,17 @@ export const AuthProvider = ({ children }) => {
     setIsUserInfo(null);
     setIsLogin(false);    
   }
+
+  useEffect(() => {
+    const getProfile = async () => {      
+      if(token) {
+        const userProfile = await getUserProfile(token, logout);        
+        setIsUserInfo(userProfile);      
+        setIsLogin(true);
+      }      
+    }
+    getProfile();
+  }, [token]);  
 
 
   return (
