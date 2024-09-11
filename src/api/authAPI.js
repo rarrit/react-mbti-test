@@ -13,7 +13,7 @@ export const handleUserLogin = async (userData) => {
   return response.data;
 };
 
-export const getUserProfile = async (token) => {
+export const getUserProfile = async (token, logout) => {
   if(!token) throw new Error("토큰이 없습니다. 다시 로그인해주세요.");  
   const response = await USER_API.get("/user", {
     headers: {
@@ -21,7 +21,6 @@ export const getUserProfile = async (token) => {
       Authorization: `Bearer ${token}`,
     },        
   }).catch((error) => {
-    const { logout } = useContext(AuthContext);
     alert(error.response.data.message);
     logout();
     return;
