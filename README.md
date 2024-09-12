@@ -82,39 +82,63 @@
 
 ### :one: 메인 페이지
 
+![1  mbti-test-main](https://github.com/user-attachments/assets/8d85374b-7b5e-4db3-a19a-35bd9fb1f9f5)
+
 - 약간의 어그로성 문구와 `테스트하기` 버튼을 통해 로그인 페이지로 이동합니다.
 
 ### :two: 회원가입 페이지
 
+![3  main-test-join](https://github.com/user-attachments/assets/0ba69d86-15fd-47b7-b134-a414e07cc298)
+
+- JWT 인증 서버를 사용하여 회원가입을 구현합니다.
 - 닉네임, 아이디, 비밀번호 입력 후 회원가입 버튼을 클릭하면 "회원가입이 완료되었습니다." 문구와 함께 `로그인` 페이지로 이동합니다.
 
 ### :three: 로그인 페이지
 
+![2  mbti-test-login](https://github.com/user-attachments/assets/dcf2d29e-35ca-43cc-acb6-19cd961ac115)
+
+- JWT 인증 서버를 사용하여 로그인을 구현합니다.
+- 인증이 되지 않은 사용자는 서비스를 이용할 수 없도록 설정합니다.
+- localStorage를 사용하여, JWT토큰을 저장하고 페이지 로드 시 해당 토큰을 이용해 사용자의 로그인 상태를 복원합니다.
 - 아이디와, 비밀번호를 입력 후 로그인 버튼을 클릭하면 "로그인이 완료되었습니다." 문구와 함께 `메인` 페이지로 이동합니다.
 
 ### :four: 프로필 페이지
 
+![4  mbti-test-mypage](https://github.com/user-attachments/assets/e728fb08-59f0-47cc-abc1-00c89f4c0ea1)
+
+
+- JWT 인증 서버를 사용하여 프로필 수정을 구현합니다.
+- 인증이 되지 않은 사용자는 서비스를 이용할 수 없도록 설정합니다.
 - 아이디, 이전 닉네임을 확인할 수 있으며, 변경 닉네임에 값을 입력 후 닉네임을 변경 버튼을 클릭하면 변경된 닉네임으로 확인이 가능합니다.
 
 ### :five: 테스트 페이지
 
+![5  mbti-test-test](https://github.com/user-attachments/assets/6125ffa1-ed27-45c3-9bae-71af51103b2b)
+
+
+- 로그인한 사용자가 MBTI 테스트를 진행할 수 있도록 합니다.
 - 12개의 문항에 대해 체크 후 저장 버튼을 클릭하면, MBTI 테스트 결과가 화면에 출력됩니다.
 
 ### :six: 결과보기 페이지
 
+![6  mbti-test-result](https://github.com/user-attachments/assets/fb96422b-b977-4936-856d-f4dbabd3bb0a)
+
 - MBTI 테스트 결과 리스트가 있는 페이지입니다.
+  - 사용자가 MBTI 테스트를 완료하면, 결과를 계산하여 json-server에 저장합니다.
+  - MBTI 결과는 `E/I`, `S/N`, `T/F`, `J/P` 네 가지 지표를 기반으로 계산됩니다.
+  - 테스트 결과는 기본적으로 공개(true)로 설정됩니다.
   - 게시물은 본인이 쓴 게시물만 공개/비공개, 삭제 처리가 가능합니다.
     - 비공개 선택 시 해당 글은 결과보기 페이지에서 본인만 확인이 가능합니다.
 
+## 구현 과정
+- [[1차] 팩트폭행 MBTI 테스트 프로젝트 - 초기 세팅 및 회원 기능](https://rarrit.github.io/react/mini/mbti-project-1/)
+- [[2차] 팩트폭행 MBTI 테스트 프로젝트 - MBTI 테스트 기능 적용](https://rarrit.github.io/react/mini/mbti-project-2/)
+- [[3차] 팩트폭행 MBTI 테스트 프로젝트 - 리팩토링(API,상태 관리)](https://rarrit.github.io/react/mini/mbti-project-3/)
+
+
 ## :joystick: Trouble Shooting
-
-작성 중
-
-### :one: API 문서를 제대로 확인하기 (로그인 데이터를 localStorage에서만 관리하며 생긴 이슈)
-
-### :two: 토큰 관리 및 로그인 유저 데이터 값 처리
-
-### :three:
+- [React에서 템플릿 리터럴 br 적용하는 방법](https://rarrit.github.io/til/react/troubleshooting/react-inner-html/)
+- 작성중...
 
 ## :fire: 회고
 
